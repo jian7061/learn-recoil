@@ -45,12 +45,12 @@ export default function TodoList() {
   const onValid = (data: IForm) => {
     console.log(data);
     if (data.password !== data.password1) {
-        setError(
-          "password1",
-          { message: "Passwords are not same" },
-          { shouldFocus: true }
-        );
-      }
+      setError(
+        "password1",
+        { message: "Passwords are not same" },
+        { shouldFocus: true }
+      );
+    }
   };
   //   errors returns what is wrong with the submitted data as 'type'
   console.log(errors);
@@ -72,7 +72,15 @@ export default function TodoList() {
         />
         <span>{errors?.email?.message}</span>
         <input
-          {...register("firstName", { required: true })}
+          {...register("firstName", {
+            required: true,
+            validate: {
+              noNico: (value) =>
+                value.includes("nico") ? "no nicos allowed" : true,
+              noNick: (value) =>
+                value.includes("nick") ? "no nick allowed" : true,
+            },
+          })}
           placeholder="First Name"
         />
         <span>{errors?.firstName?.message}</span>
