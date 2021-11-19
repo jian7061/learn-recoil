@@ -21,13 +21,17 @@ import { useForm } from "react-hook-form";
 // }
 
 export default function TodoList() {
-  const { register, handleSubmit, formState } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   //   handleSubmit is used to validate input data
   const onValid = (data: any) => {
     console.log(data);
   };
-  //   formState.errors returns what is wrong with the submitted data as 'type'
-  console.log(formState.errors);
+  //   errors returns what is wrong with the submitted data as 'type'
+  console.log(errors);
   return (
     <div>
       <form
@@ -44,30 +48,30 @@ export default function TodoList() {
           })}
           placeholder="Email"
         />
-        <span>{formState.errors?.email?.message}</span>
+        <span>{errors?.email?.message}</span>
         <input
           {...register("firstName", { required: true })}
           placeholder="First Name"
         />
-        <span>{formState.errors?.firstName?.message}</span>
+        <span>{errors?.firstName?.message}</span>
 
         <input
           {...register("lastName", { required: true })}
           placeholder="Last Name"
         />
-        <span>{formState.errors?.lastName?.message}</span>
+        <span>{errors?.lastName?.message}</span>
 
         <input
           {...register("username", { required: true, minLength: 10 })}
           placeholder="Username"
         />
-        <span>{formState.errors?.username?.message}</span>
+        <span>{errors?.username?.message}</span>
 
         <input
           {...register("password", { required: true, minLength: 5 })}
           placeholder="Password"
         />
-        <span>{formState.errors?.password?.message}</span>
+        <span>{errors?.password?.message}</span>
 
         <input
           {...register("password1", {
@@ -79,7 +83,7 @@ export default function TodoList() {
           })}
           placeholder="Password1"
         />
-        <span>{formState.errors?.password1?.message}</span>
+        <span>{errors?.password1?.message}</span>
 
         <button>Add</button>
       </form>
