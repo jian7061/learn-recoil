@@ -35,6 +35,7 @@ export default function TodoList() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<IForm>({
     defaultValues: {
       email: "@naver.com",
@@ -43,6 +44,13 @@ export default function TodoList() {
   //   handleSubmit is used to validate input data
   const onValid = (data: IForm) => {
     console.log(data);
+    if (data.password !== data.password1) {
+        setError(
+          "password1",
+          { message: "Passwords are not same" },
+          { shouldFocus: true }
+        );
+      }
   };
   //   errors returns what is wrong with the submitted data as 'type'
   console.log(errors);
