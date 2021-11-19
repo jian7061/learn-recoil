@@ -20,14 +20,28 @@ import { useForm } from "react-hook-form";
 //   );
 // }
 
+interface IForm {
+  email: string;
+  firstName: string;
+  // if it's not required -> optional
+  lastName?: string;
+  username: string;
+  password: string;
+  password1: string;
+}
+
 export default function TodoList() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<IForm>({
+    defaultValues: {
+      email: "@naver.com",
+    },
+  });
   //   handleSubmit is used to validate input data
-  const onValid = (data: any) => {
+  const onValid = (data: IForm) => {
     console.log(data);
   };
   //   errors returns what is wrong with the submitted data as 'type'
